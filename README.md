@@ -48,3 +48,4 @@ Note: `.biometryAny` accepts any enrolled biometric. If your threat model needs 
 4. **Boolean biometric gates.** A UserDefaults flag is not access control. Bind the secret to biometry in the Keychain.
 5. **No cleanup on logout.** Tokens left in the Keychain after logout stay valid if the backend does not invalidate them. Delete on logout, and invalidate server-side too.
 6. **Ignoring OSStatus.** Keychain calls fail for real reasons (duplicate items, locked device, no entitlement). Check the status; this wrapper throws instead of swallowing it.
+7. **Large blobs in the Keychain.** The Keychain is built for small secrets such as tokens, passwords, and keys, not for files, photos, or large JSON payloads. Storing large data there is slow and hard to manage. Keep the encryption key in the Keychain instead, and store the encrypted data in the app's file storage.
